@@ -1,8 +1,12 @@
 let userScore = 0;
-let comScore = 0;
+let compScore = 0;
 
 const choices=document.querySelectorAll(".choice");
 const msg=document.querySelector("#msg");
+
+const userScorePara=document.querySelector("#user-score");
+const compScorePara=document.querySelector("#comp-score");
+
  //generate computer's choice
 const genCompChoice =() =>{
     const options=["rock","paper","scissor"];
@@ -12,17 +16,20 @@ const genCompChoice =() =>{
 const drawGame =() =>{
     console.log("game was draw");
      msg.innerText ="Draw";
+      msg.style.backgroundColor = "cadetblue";
 }
 
-const showWinner=(userWin) =>{
+const showWinner=(userWin,userChoice,compChoice) =>{
 
     if(userWin){
-        console.log("you won!!");
-        msg.innerText ="you win";
+        userScore =userScore+1;
+        userScorePara.innerText=userScore;
+        msg.innerText ="you win ! " +" "+"your"+ " " +userChoice +" "+ "beats" +" "+ compChoice;
         msg.style.backgroundColor = "green";
     }else{
-        console.log("you loose!!");
-         msg.innerText ="you loose";
+       compScore=compScore+1;
+       compScorePara.innerText=compScore;
+         msg.innerText ="you loose ! " +" "+ compChoice +" "+ "beats" +" "+"your"+" "+ userChoice;
           msg.style.backgroundColor = "red";
     }
 
@@ -52,7 +59,7 @@ const playGame =(userChoice) =>{
             //userChoice is Scissor and compChoice is rock or paper
             userWin = compChoice === "rock" ? false :true ;
         }
-        showWinner(userWin);
+        showWinner(userWin,userChoice,compChoice);
     }
     
 }
